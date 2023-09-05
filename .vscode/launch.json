@@ -1,0 +1,84 @@
+{
+    // https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) start",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/source/boot/boot.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "x86_64-elf-gdb",
+            "miDebuggerServerAddress": "127.0.0.1:1234",
+            "targetArchitecture": "x86",
+            "stopAtConnect": true,
+            
+            // before debugging with gdb. write disk and start qemu
+            "linux": {
+                "preLaunchTask": "Debug and Run", 
+                "miDebuggerPath": "gdb", 
+            },
+            "customLaunchSetupCommands": [],
+            "setupCommands": [
+                {
+                    "description": "gdb alignment print",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "assembly style Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+            ],
+            // config after gdb connection
+            "postRemoteConnectCommands": [
+                {
+                    "description": "load boot symbol file",
+                    "text": "-file-symbol-file ./build/source/boot/boot.elf",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load kenerl symbol file",
+                    "text": "add-symbol-file ./build/source/kernel/kernel.elf 0x10000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load loader symbol file",
+                    "text": "add-symbol-file ./build/source/loader/loader.elf 0x8000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load init symbol file",
+                    "text": "add-symbol-file ./build/source/init/init.elf 0x82000000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load shell symbol file",
+                    "text": "add-symbol-file ./build/source/shell/shell.elf 0x81000000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load loop symbol file",
+                    "text": "add-symbol-file ./build/source/loop/loop.elf 0x83000000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "load snake symbol file",
+                    "text": "add-symbol-file ./build/source/snake/snake.elf 0x84000000",
+                    "ignoreFailures": false
+                },
+                {
+                    "description": "run to 0x7c00",
+                    "text": "-exec-until *0x7c00",
+                    "ignoreFailures": false
+                },
+            ],
+        }
+    ]
+}
