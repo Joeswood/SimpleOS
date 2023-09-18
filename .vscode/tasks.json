@@ -28,7 +28,7 @@
         },
         {
             // run and debug
-            "label": "run and debug",
+            "label": "Run and Debug",
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Write image file",
