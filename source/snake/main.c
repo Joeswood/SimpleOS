@@ -12,7 +12,17 @@ static int row_max, col_max;
 static body_part_t * food;
 static snake_t snake;		//now only support one snake
 
-
+/**
+ * check if snake bites itself
+ */
+static int is_hit_itself (void) {
+	for (body_part_t * body = snake.head->next; body; body = body->next) {
+		if ((body->row == snake.head->row) && (body->col == snake.head->col)) {
+			return 1;
+		}
+	}
+	return 0;
+}
 
 /**
  * check if snake meets the wall
