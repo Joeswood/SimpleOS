@@ -1,7 +1,7 @@
 # SimpleOS: An Educational 32-bit Operating System
 
 ## Introduction
-SimpleOS is a 32-bit educational operating system built from scratch using assembly and C. It utilizes shell scripts for disk writes and QEMU for system loading and debugging. This README provides an overview of its components and functionalities.
+SimpleOS is a 32-bit operating system built from scratch using assembly and C. It utilizes shell scripts for disk writes and QEMU for system loading and debugging. This README provides an overview of its components and functionalities.
 
 ## Features
 
